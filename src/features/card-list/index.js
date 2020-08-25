@@ -7,8 +7,8 @@ import {Card} from "../card";
 import {Wrapper} from "./ui";
 
 export const CardList = () => {
-    const cards = useList($cards, ({rank, suit, open}) => (
-        <Card rank={rank} suit={suit} open={open}/>
+    const cards = useList($cards, ({rank, suit, id, open}) => (
+        <Card rank={rank} suit={suit} open={open} id={id}/>
     ))
 
     return (
