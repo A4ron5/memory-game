@@ -11,10 +11,10 @@ const Wrapper = styled.div`
   align-items: center;
 `
 
-export const Card = ({rank, suit, open}) => {
+export const Card = ({rank, suit, id, open}) => {
 
    return (
-       <Wrapper open={open} onClick={() => cardClicked({rank, suit})}>
+       <Wrapper open={open} onClick={() => cardClicked({rank, suit, id})}>
           {rank} - {suit}
        </Wrapper>
    )
