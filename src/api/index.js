@@ -1,4 +1,5 @@
 import {shuffle} from "../lib/shuffle";
+import {unify} from "../lib/unify";
 
 const suits = ["diamonds", "spades", "hearts", "clubs"];
 const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
@@ -22,12 +23,15 @@ export const createDeck = () => {
 
     shuffle(fullDeck);
 
-    const deckWithoutPair = fullDeck.slice(0,9);
 
-    const deckPaired = [...deckWithoutPair, ...deckWithoutPair];
+    const leftDeckPart = fullDeck.slice(0,9);
+    const rightDeckPart = leftDeckPart.map(card => Object.assign({}, card));
+
+    const deckPaired = leftDeckPart.concat(rightDeckPart);
 
     shuffle(deckPaired);
 
+    unify(deckPaired);
     return deckPaired;
 };
 
