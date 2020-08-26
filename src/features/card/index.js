@@ -14,8 +14,8 @@ const Wrapper = styled.div`
 export const Card = ({rank, suit, id, open}) => {
 
    return (
-       <Wrapper open={open} onClick={() => cardClicked({rank, suit, id})}>
-          {rank} - {suit}
+       <Wrapper open={open} onClick={() => cardClicked({rank, suit, id, open})}>
+          {rank} - {suit} - {open.toString()}
        </Wrapper>
    )
 }
