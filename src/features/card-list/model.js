@@ -1,18 +1,24 @@
 import {createEvent, createStore, sample, guard, split} from "effector";
 
-import {$selectedCards, selectedCardsCleared} from "../card/model";
+import {$selectedCards, selectedCardsCleared, cardSelected} from "../card/model";
 import {createDeck} from "../../api";
-import {cardsEqual} from "../../lib/cardsEqual";
+import {compareCards} from "../../lib/compareCards";
+import {getMarkedCards} from '../../lib/getMarkedCards';
 
 export const $cards = createStore(createDeck());
 export const $isCardPair = $selectedCards.map(cards => cards.length === 2);
-export const $isCardPairSimilar= createStore(false);
+export const $isGameOver = $cards.map(card => !card.open)
 
-export const recreateDeck = createEvent();
-export const comparedCards = createEvent();
-export const comparedCardsFinished = createEvent();
+export const recreatedDeck = createEvent();
+const comparedCards = createEvent();
+const comparedCardsFinished = createEvent();
+const comparedCardsSuccess = createEvent();
+const comparedCardsFailed = createEvent();
+const cardSelectedSampled = sample($cards, cardSelected, getMarkedCards)
 
-$cards.on(recreateDeck, () => createDeck());
+$cards
+    .on(recreatedDeck, () => createDeck())
+    .on(cardSelectedSampled, (_, payload) => payload);
 
 guard({
     source: $selectedCards,
@@ -23,19 +29,20 @@ guard({
 sample({
     source: $selectedCards,
     clock: comparedCards,
-    fn: source => cardsEqual(...source),
+    fn: source => compareCards(...source),
     target: comparedCardsFinished
 })
 
 guard({
     source: comparedCardsFinished,
     filter: value => value,
-    target: selectedCardsCleared
+    target: [comparedCardsSuccess, selectedCardsCleared]
 })
 
-// guard({
-//     source: comparedCardsFinished,
-//     filter: value => !value
-// })
+guard({
+    source: comparedCardsFinished,
+    filter: value => !value,
+    target: [selectedCardsCleared]
+})
 
 $cards.watch(console.log)
