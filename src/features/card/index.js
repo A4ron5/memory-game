@@ -1,21 +1,16 @@
 import React from 'react';
-import styled from "styled-components";
 
 import {cardClicked} from "./model";
-
-const Wrapper = styled.div`
-  height: 250px;
-  background: burlywood;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
+import {StyledCard} from "./ui";
 
 export const Card = ({rank, suit, id, open}) => {
 
-   return (
-       <Wrapper open={open} onClick={() => cardClicked({rank, suit, id, open})}>
-          {rank} - {suit} - {open.toString()}
-       </Wrapper>
-   )
+    return (
+        <StyledCard
+           open={open}
+           rank={rank}
+           suit={suit}
+           clickHandler={() => cardClicked({rank, suit, id, open})}
+        />
+    )
 }
