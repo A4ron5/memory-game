@@ -4,7 +4,7 @@ import {useList} from "effector-react";
 import {$cards} from "./model";
 
 import {Card} from "../card";
-import {Wrapper} from "./ui";
+import {StyledCardList} from "./ui";
 
 export const CardList = () => {
     const cards = useList($cards, ({rank, suit, id, open}) => (
@@ -12,6 +12,6 @@ export const CardList = () => {
     ))
 
     return (
-        <Wrapper>{cards}</Wrapper>
+        <StyledCardList>{cards}</StyledCardList>
     )
 }
