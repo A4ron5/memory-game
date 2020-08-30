@@ -10,7 +10,7 @@ const Layout = styled.div`
   height: 168px;
   width: 120px;
   padding: 0.5rem 0.3rem;
-  background: #fff;
+  background: ${({open}) => open ? 'rgba(255,255,255,0.6)' : '#fff'};
   border-radius: 0.5rem;
 `;
 
