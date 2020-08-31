@@ -3,10 +3,12 @@ export const compareCards = (first, second) => {
 
     for (const key of keys) {
         if (key === 'id') {
-            return first[key] !== second[key]
+            if (first[key] !== second[key]) {
+                return true;
+            }
         }
         if (first[key] !== second[key]) {
-            return false;
+            return [first, second];
         }
     }
 
