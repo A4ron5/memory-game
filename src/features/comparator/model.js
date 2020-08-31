@@ -1,4 +1,4 @@
-import {createEvent, createStore, guard, sample} from "effector";
+import {createEvent, createEffect, createStore, guard, sample, forward} from "effector";
 
 import {cardClicked, cardSelected} from "../card/model";
 
@@ -10,6 +10,8 @@ export const comparedCardsFinished = createEvent();
 export const comparedCardsSuccess = createEvent();
 export const comparedCardsFailed = createEvent();
 
+
+const $isComparing = createStore(false);
 const $selectedCards = createStore([]);
 
 const $isCardPair = $selectedCards.map(cards => cards.length === 2);
@@ -19,11 +21,17 @@ $selectedCards
     .on(cardSelected, (state, card) => [...state, card])
     .reset(selectedCardsCleared);
 
-$selectedCards.watch(console.log)
+$isComparing
+    .on(comparedCards, () => true)
+    .reset(comparedCardsFinished)
 
 guard({
     source: cardClicked,
-    filter: $isCardsLessThanTwo,
+    filter: sample({
+        source: $isCardsLessThanTwo,
+        clock: $isComparing,
+        fn: (source, clock) => source && !clock
+    }),
     target: cardSelected
 })
 
@@ -42,14 +50,17 @@ sample({
 
 guard({
     source: comparedCardsFinished,
-    filter: value => !value,
+    filter: value => Array.isArray(value),
     target: [comparedCardsFailed, selectedCardsCleared]
 })
 
 guard({
     source: comparedCardsFinished,
-    filter: value => value,
+    filter: value => !Array.isArray(value),
     target: [comparedCardsSuccess, selectedCardsCleared]
 })
 
-
+// forward({
+//     from: [comparedCardsSuccess, comparedCardsFailed],
+//     to: delayedAfterCompared
+// })
