@@ -1,19 +1,19 @@
 import {createStore, sample} from "effector";
 
 import {cardSelected} from "../card/model";
-import {comparedCardsFailed, comparedCardsSuccess} from "../comparator/model";
+import {comparedCardsFailed} from "../comparator/model";
 
 import {createDeck} from "../../api";
-import {getMarkedCards} from "../../lib/getMarkedCards";
+import {getMarkedCard, getUnmarkedCards} from "../../lib/getCards";
 
 export const $cards = createStore(createDeck());
 
-const cardMarked = sample($cards, cardSelected, getMarkedCards)
+const cardMarked = sample($cards, cardSelected, getMarkedCard)
+const cardsUnmarked = sample($cards, comparedCardsFailed, getUnmarkedCards);
 
 $cards
     .on(cardMarked, (_, payload) => payload)
-    .on(comparedCardsSuccess, () => {})
-    .on(comparedCardsFailed, () => {})
+    .on(cardsUnmarked, (_, payload) => payload)
 ;
 
 $cards.watch(console.log)
