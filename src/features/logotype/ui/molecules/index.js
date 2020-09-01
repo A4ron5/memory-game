@@ -1,0 +1,1 @@
+export {StyledLogotype} from './Logotype';

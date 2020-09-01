@@ -7,6 +7,9 @@ import {createDeck} from "../../api";
 import {getMarkedCard, getUnmarkedCards} from "../../lib/getCards";
 
 export const $cards = createStore(createDeck());
+const $isGameOver = $cards.map((state) => state.length)
+
+$isGameOver.watch(console.log)
 
 const cardMarked = sample($cards, cardSelected, getMarkedCard)
 const cardsUnmarked = sample($cards, comparedCardsFailed, getUnmarkedCards);
@@ -16,4 +19,4 @@ $cards
     .on(cardsUnmarked, (_, payload) => payload)
 ;
 
-$cards.watch(console.log)
+// $cards.watch(console.log)
