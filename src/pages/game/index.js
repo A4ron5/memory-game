@@ -8,11 +8,11 @@ import {Counter} from "../../features/counter";
 import {RestartButton} from "../../features/restart-button";
 
 const Container = styled.div`
-  width: 1200px;
+  width: 1000px;
   margin: 0 auto;
 `
 
-export const Home = () => {
+export const Game = () => {
 
   return (
     <Layout>
