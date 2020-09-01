@@ -1,13 +1,17 @@
 import React from "react";
-import { Home } from "./pages/home";
+import {BrowserRouter, Redirect} from "react-router-dom";
 
+import {Routes} from "./routes";
 import {GlobalStyles} from "./ui/global";
 
 export const App = () => {
   return (
       <>
         <GlobalStyles/>
-        <Home/>
+        <BrowserRouter>
+            <Redirect to="/start"/>
+            <Routes/>
+        </BrowserRouter>
       </>
   );
 };
