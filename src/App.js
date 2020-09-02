@@ -1,17 +1,20 @@
 import React from "react";
-import {BrowserRouter, Redirect} from "react-router-dom";
+import {Router, Redirect} from "react-router-dom";
+
+import {history} from "./lib/routing";
 
 import {Routes} from "./routes";
 import {GlobalStyles} from "./ui/global";
+
 
 export const App = () => {
   return (
       <>
         <GlobalStyles/>
-        <BrowserRouter>
+        <Router history={history}>
             <Redirect to="/start"/>
             <Routes/>
-        </BrowserRouter>
+        </Router>
       </>
   );
 };
