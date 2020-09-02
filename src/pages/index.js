@@ -1,15 +1,21 @@
-import {Start} from "./start";
-import {Game} from "./game";
+import {StartPage} from "./start";
+import {GamePage} from "./game";
+import {EndPage} from "./end";
 
 export const routes = () => [
     {
         path: "/start",
         exact: true,
-        component: Start,
+        component: StartPage,
     },
     {
         path: "/game",
         exact: true,
-        component: Game,
+        component: GamePage,
+    },
+    {
+        path: "/end",
+        exact: true,
+        component: EndPage
     }
 ]
