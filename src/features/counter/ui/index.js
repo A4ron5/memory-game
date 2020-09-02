@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 
 export const StyledCounter = styled.div`
     text-align: center;
@@ -6,4 +6,8 @@ export const StyledCounter = styled.div`
     font-size: 1.125rem;
     color: #fff;
     white-space: pre-wrap;
+    
+    ${({secondary}) => secondary && css`
+      font-size: 2.5rem;
+    `}
 `;
