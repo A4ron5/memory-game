@@ -1,7 +1,6 @@
 import {shuffle} from "../lib/shuffle";
 import {unify} from "../lib/unify";
 
-// const suits = ["♦", "♠", "♥", "♣"];
 const suits = [
     {symbol: '♦', color: 'red'},
     {symbol: '♠', color: 'black'},
@@ -14,7 +13,8 @@ const createCard = (rank, suit) => {
     return {
         rank,
         suit,
-        open: false
+        open: false,
+        disable: false
     };
 };
 
