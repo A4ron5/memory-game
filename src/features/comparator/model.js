@@ -50,13 +50,13 @@ sample({
 
 guard({
     source: comparedCardsFinished,
-    filter: value => Array.isArray(value),
+    filter: ({status}) => status === 'failed',
     target: [comparedCardsFailed, selectedCardsCleared]
 })
 
 guard({
     source: comparedCardsFinished,
-    filter: value => !Array.isArray(value),
+    filter: ({status}) => status === 'success',
     target: [comparedCardsSuccess, selectedCardsCleared]
 })
 
