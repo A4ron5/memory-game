@@ -4,13 +4,22 @@ export const compareCards = (first, second) => {
     for (const key of keys) {
         if (key === 'id') {
             if (first[key] !== second[key]) {
-                return true;
+                return {
+                    status: 'success',
+                    cards: [first, second]
+                };
             }
         }
         if (first[key] !== second[key]) {
-            return [first, second];
+            return {
+                status: 'failed',
+                cards: [first, second]
+            };
         }
     }
 
-    return true;
+    return {
+        status: 'success',
+        cards: [first, second]
+    };
 }
