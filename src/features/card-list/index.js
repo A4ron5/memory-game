@@ -7,8 +7,8 @@ import {Card} from "../card";
 import {StyledCardList} from "./ui";
 
 export const CardList = () => {
-    const cards = useList($cards, ({rank, suit, id, open}) => (
-        <Card rank={rank} suit={suit} open={open} id={id}/>
+    const cards = useList($cards, ({rank, suit, id, open, disable}) => (
+        <Card rank={rank} suit={suit} open={open} id={id} disable={disable}/>
     ))
 
     return (
