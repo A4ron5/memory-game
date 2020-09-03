@@ -18,7 +18,7 @@ const Layout = styled.div`
     transform: scale(1.05) 
   }
   
-  ${({open}) => open && css`
+  ${({disable}) => disable && css`
     background: rgba(255,255,255,0.6);
     
     &:hover {
@@ -27,8 +27,8 @@ const Layout = styled.div`
   `}
 `;
 
-export const StyledCard = ({rank, suit, open, clickHandler}) => (
-  <Layout open={open} onClick={clickHandler}>
+export const StyledCard = ({rank, suit, disable, clickHandler}) => (
+  <Layout disable={disable} onClick={clickHandler}>
       <HalfOfCard rank={rank} suit={suit}/>
       <BigSuit suit={suit}/>
       <HalfOfCard rank={rank} suit={suit} bottom/>
