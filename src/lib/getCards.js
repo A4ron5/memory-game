@@ -10,12 +10,29 @@ export const getMarkedCard = (cards, selectedCard) => {
     })
 }
 
-export const getUnmarkedCards = (cards, [firstCard, secondCard]) => {
-    return cards.map(card => {
+export const getComparedFailed = (deck, {cards}) => {
+    const [firstCard, secondCard] = cards;
+
+    return deck.map(card => {
         if (card.id === firstCard.id || card.id === secondCard.id) {
             return {
                 ...card,
                 open: false
+            }
+        }
+        return card
+    })
+}
+
+export const getComparedSuccess = (deck, {cards}) => {
+    const [firstCard, secondCard] = cards;
+
+    return deck.map(card => {
+        if (card.id === firstCard.id || card.id === secondCard.id) {
+            return {
+                ...card,
+                open: true,
+                disable: true
             }
         }
         return card
