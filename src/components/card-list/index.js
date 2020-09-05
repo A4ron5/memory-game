@@ -1,7 +1,7 @@
 import React from 'react';
 import {useList} from "effector-react";
 
-import {$cards} from "./model";
+import {$cards} from "../../models/cards";
 
 import {Card} from "../card";
 import {StyledCardList} from "./ui";
