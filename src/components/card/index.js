@@ -1,7 +1,8 @@
 import React from 'react';
 
-import {cardClicked} from "./model";
 import {StyledCard} from "./ui";
+
+import {cardClicked} from "../../models/cards";
 
 export const Card = ({rank, suit, id, open, disable}) => {
 
