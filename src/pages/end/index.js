@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 
-import {Counter} from "../../features/counter";
+import {Counter} from "../../components/counter";
 import {Button} from "../../ui/atoms";
 
 const Container = styled.div`
