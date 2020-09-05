@@ -1,25 +1,21 @@
 export const compareCards = (first, second) => {
-    const keys = Object.keys(first);
+    const omitCardID = (card) => {
+        const {id, ...left} = card;
+        return left;
+    }
 
-    for (const key of keys) {
-        if (key === 'id') {
-            if (first[key] !== second[key]) {
-                return {
-                    status: 'success',
-                    cards: [first, second]
-                };
-            }
-        }
-        if (first[key] !== second[key]) {
-            return {
-                status: 'failed',
-                cards: [first, second]
-            };
+    const firstCard = omitCardID(first)
+    const secondCard = omitCardID(second)
+
+    if (JSON.stringify(firstCard) === JSON.stringify(secondCard)) {
+        return {
+            status: 'success',
+            cards: [{...first, disable: true}, {...second, disable: true}]
         }
     }
 
     return {
-        status: 'success',
-        cards: [first, second]
-    };
+        status: 'failed',
+        cards: [{...first, open: false}, {...second, open: false}]
+    }
 }
