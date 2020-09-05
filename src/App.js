@@ -1,6 +1,8 @@
 import React from "react";
 import {Router, Redirect} from "react-router-dom";
 
+import "./models/init"
+
 import {history} from "./lib/routing";
 
 import {Routes} from "./routes";
