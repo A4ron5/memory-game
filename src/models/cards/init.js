@@ -1,23 +1,46 @@
-import {sample, guard, split} from 'effector';
+import {sample, guard, attach} from 'effector';
+import {history} from "../../lib/routing";
 
 import {
     cardClicked,
     cardSelected,
     cardCompared,
-    cardComparingFinished,
-    cardComparingSuccessFx,
-    cardComparingFailedFx,
+    cardComparingFinishedFx,
     $cards,
     $isCardsLessThanTwo,
     $isPairOfCards,
-    $comparingCards
+    $comparingCards,
+    $isGameOver
 } from "./index";
 
 import {compareCards} from "../../lib/compareCards";
 
+export const attachedCardComparingFinishedFx = attach({
+    effect: cardComparingFinishedFx,
+    source: $cards,
+    mapParams: (comparingCards, cards) => {
+        const {cards: [firstCard, secondCard], status} = comparingCards;
+
+        const newCards = cards.map((card) => {
+            if (firstCard.id === card.id) {
+                return firstCard
+            }
+            if (secondCard.id === card.id) {
+                return secondCard
+            }
+            return card
+        })
+
+        return {
+            cards: newCards,
+            status
+        }
+    }
+})
+
 $comparingCards
     .on(cardSelected, (selected, card) => [...selected, card])
-    .reset([cardComparingSuccessFx.doneData, cardComparingFailedFx.failData])
+    .reset(attachedCardComparingFinishedFx.finally)
 
 $cards
     .on(cardSelected, (cards, selectedCard) => {
@@ -31,32 +54,10 @@ $cards
             return card;
         })
     })
-    .on(cardComparingSuccessFx.doneData, (cards, comparedCards) => {
-        const {cards: [firstCard, secondCard]} = comparedCards;
-
-        return cards.map((card) => {
-            if (firstCard.id === card.id) {
-                return firstCard
-            }
-            if (secondCard.id === card.id) {
-                return secondCard
-            }
-            return card
-        })
-    })
-    .on(cardComparingFailedFx.failData, (cards, comparedCards) => {
-        const {cards: [firstCard, secondCard]} = comparedCards;
-
-        return cards.map((card) => {
-            if (firstCard.id === card.id) {
-                return firstCard
-            }
-            if (secondCard.id === card.id) {
-                return secondCard
-            }
-            return card
-        })
-    })
+    .on(
+        [attachedCardComparingFinishedFx.doneData, attachedCardComparingFinishedFx.failData],
+        (_, cards) => cards
+    )
 
 guard({
     source: cardClicked.filterMap((card) => {
@@ -78,17 +79,11 @@ sample({
     source: $comparingCards,
     clock: cardCompared,
     fn: cards => compareCards(...cards),
-    target: cardComparingFinished
+    target: attachedCardComparingFinishedFx
 })
 
-split({
-    source: cardComparingFinished,
-    match: {
-        success: res => res.status === 'success',
-        failed: res => res.status === 'failed'
-    },
-    cases: {
-        success: cardComparingSuccessFx,
-        failed: cardComparingFailedFx
+$isGameOver.watch(isOver => {
+    if (isOver) {
+        history.push('/end');
     }
 })
