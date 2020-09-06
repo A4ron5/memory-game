@@ -1,6 +1,6 @@
 import {$score} from "./index";
-import {cardComparingSuccessFx, cardComparingFailedFx} from "../cards";
+import {attachedCardComparingFinishedFx} from "../cards/init";
 
 $score
-    .on(cardComparingSuccessFx.doneData, score => score + 75)
-    .on(cardComparingFailedFx.failData, score => score - 35)
+    .on(attachedCardComparingFinishedFx.doneData, score => score + 75)
+    .on(attachedCardComparingFinishedFx.failData, score => score - 35)
