@@ -15,20 +15,25 @@ const Layout = styled.div`
   transition: all .2s ease-in-out;
   
   &:hover {
-    transform: scale(1.05) 
+    box-shadow: 0 0 15px rgba(0,0,0,0.6);
   }
+  
+  ${({open}) => open && css`
+    transform: scale(1.07);
+    box-shadow: 0 0 15px rgba(0,0,0,0.6);  
+  `}
   
   ${({disable}) => disable && css`
     background: rgba(255,255,255,0.6);
     
     &:hover {
-      transform: none;
+      box-shadow: none;
     }
   `}
 `;
 
-export const StyledCard = ({rank, suit, disable, clickHandler}) => (
-  <Layout disable={disable} onClick={clickHandler}>
+export const StyledCard = ({rank, suit, disable, open, clickHandler}) => (
+  <Layout disable={disable} open={open} onClick={clickHandler}>
       <HalfOfCard rank={rank} suit={suit}/>
       <BigSuit suit={suit}/>
       <HalfOfCard rank={rank} suit={suit} bottom/>

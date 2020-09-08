@@ -4,6 +4,7 @@ import {createDeck} from "../../api";
 export const cardClicked = createEvent();
 export const cardSelected = createEvent();
 export const cardCompared = createEvent();
+
 export const cardComparingFinishedFx = createEffect({
     handler: res => new Promise((resolve, reject) => {
         setTimeout(() => {
