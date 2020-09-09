@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "effector": "^21.2.2",
-    "effector-react": "^21.0.4",
+    "effector": "^21.3.0",
+    "effector-react": "^21.0.6",
     "history": "4.10.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-config": "^5.1.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
-    "styled-components": "^5.1.1",
+    "styled-components": "^5.2.0",
     "styled-normalize": "^8.0.7"
   },
   "scripts": {
