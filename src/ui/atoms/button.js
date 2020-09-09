@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
 export const Button = styled.button`
   display: block;
@@ -27,4 +27,11 @@ export const Button = styled.button`
     text-decoration: none;
     text-transform: uppercase;
   }
+   
+   ${({secondary}) => secondary && css`
+     background: transparent;
+     color: #fff;
+     border: none;    
+   `}
+    
 `;

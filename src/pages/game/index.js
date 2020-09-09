@@ -16,7 +16,7 @@ export const GamePage = () => {
 
   return (
     <Layout>
-        <RestartButton/>
+        <RestartButton secondary/>
         <Counter/>
         <Container>
             <CardList/>
