@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import {useGate} from "effector-react";
+
+import {GamePageGate} from "../../models/cards";
 
 import {Layout} from "../../ui/layout";
 
 import {CardList} from "../../components/card-list";
 import {Counter} from "../../components/counter";
-import {RestartButton} from "../../components/restart-button";
 
 const Container = styled.div`
   width: 1000px;
@@ -13,10 +15,10 @@ const Container = styled.div`
 `
 
 export const GamePage = () => {
+    useGate(GamePageGate);
 
   return (
     <Layout>
-        <RestartButton secondary/>
         <Counter/>
         <Container>
             <CardList/>
