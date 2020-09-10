@@ -7,7 +7,6 @@ import {cardClicked} from "../../models/cards";
 export const Card = ({rank, suit, id, open, disable}) => {
 
     const clickHandler = () => {
-        if (open || disable) return;
         cardClicked({rank, suit, id, open, disable})
     }
 
