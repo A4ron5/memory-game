@@ -1,7 +1,8 @@
-import {sample, guard, attach} from 'effector';
+import {sample, guard, attach, forward} from 'effector';
 import {history} from "../../lib/routing";
 
 import {
+    initedCards,
     cardClicked,
     cardSelected,
     cardCompared,
@@ -10,10 +11,43 @@ import {
     $isCardsLessThanTwo,
     $isPairOfCards,
     $comparingCards,
-    $isGameOver
+    $isGameOver,
+    GamePageGate
 } from "./index";
 
 import {compareCards} from "../../lib/compareCards";
+
+const attachedInitedCards = attach({
+    effect: initedCards,
+    source: $cards,
+    mapParams: (_, cards) => {
+        const openedCards = cards.map(card => ({...card, open: true}))
+        const closedCards = cards.map(card => ({...card, open: false}))
+
+        setTimeout(() => {
+            return closedCards;
+        }, 5000)
+        return openedCards;
+    }
+})
+
+forward({
+    from: GamePageGate.open,
+    to: attachedInitedCards
+})
+
+cardComparingFinishedFx.use(res => new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const {status, cards} = res;
+
+            if (status === 'success') {
+                resolve(cards)
+            } else {
+                reject(cards)
+            }
+        }, 1000)
+    })
+)
 
 export const attachedCardComparingFinishedFx = attach({
     effect: cardComparingFinishedFx,
@@ -43,6 +77,7 @@ $comparingCards
     .reset(attachedCardComparingFinishedFx.finally)
 
 $cards
+    .on(attachedInitedCards, (_, cards) => cards)
     .on(cardSelected, (cards, selectedCard) => {
         return cards.map((card) => {
             if (selectedCard.id === card.id) {
