@@ -1,22 +1,15 @@
 import React from 'react';
 
-import {StyledCard} from "./ui";
+import { StyledCard } from './ui';
 
-import {cardClicked} from "../../models/cards";
+import { cardClicked } from '../../models/cards';
 
-export const Card = ({rank, suit, id, open, disable}) => {
+export const Card = ({ rank, suit, id, open, disable }) => {
+	const clickHandler = () => {
+		cardClicked({ rank, suit, id, open, disable });
+	};
 
-    const clickHandler = () => {
-        cardClicked({rank, suit, id, open, disable})
-    }
-
-    return (
-        <StyledCard
-           open={open}
-           disable={disable}
-           rank={rank}
-           suit={suit}
-           clickHandler={clickHandler}
-        />
-    )
-}
+	return (
+		<StyledCard open={open} disable={disable} rank={rank} suit={suit} clickHandler={clickHandler} />
+	);
+};

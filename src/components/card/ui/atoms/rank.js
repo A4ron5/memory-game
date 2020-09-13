@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Rank = styled.span`
-    font-size: 1.25rem;
-    color: ${({color}) => color}
+	font-size: 1.25rem;
+	color: ${({ color }) => color};
 `;

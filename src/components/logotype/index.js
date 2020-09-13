@@ -1,10 +1,7 @@
 import React from 'react';
 
-import {StyledLogotype} from "./ui";
-
+import { StyledLogotype } from './ui';
 
 export const Logotype = () => {
-    return (
-        <StyledLogotype />
-    )
-}
+	return <StyledLogotype />;
+};

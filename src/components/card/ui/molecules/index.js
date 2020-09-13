@@ -1,2 +1,2 @@
-export {HalfOfCard} from './half-of-card';
-export {BigSuit} from './big-suit';
+export { HalfOfCard } from './half-of-card';
+export { BigSuit } from './big-suit';

@@ -1,1 +1,1 @@
-export {StyledCard} from './organisms';
+export { StyledCard } from './organisms';

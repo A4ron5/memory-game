@@ -1,1 +1,1 @@
-export {StyledLogotype} from './Logotype';
+export { StyledLogotype } from './Logotype';

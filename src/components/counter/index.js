@@ -1,17 +1,13 @@
 import React from 'react';
-import {useStore} from "effector-react";
+import { useStore } from 'effector-react';
 
-import {$score} from "../../models/score";
+import { $score } from '../../models/score';
 
-import {StyledCounter} from "./ui";
+import { StyledCounter } from './ui';
 
-export const Counter = ({secondary}) => {
-    const counter = useStore($score);
-    const score = `Score \n${counter}`
+export const Counter = ({ secondary }) => {
+	const counter = useStore($score);
+	const score = `Score \n${counter}`;
 
-    return (
-        <StyledCounter secondary={secondary}>
-            {score}
-        </StyledCounter>
-    )
-}
+	return <StyledCounter secondary={secondary}>{score}</StyledCounter>;
+};

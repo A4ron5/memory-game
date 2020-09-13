@@ -1,4 +1,3 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const Layout = styled.main`
-`;
+export const Layout = styled.main``;

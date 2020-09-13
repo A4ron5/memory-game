@@ -1,13 +1,16 @@
 import React from 'react';
 
-import {resetedCards} from "../../models/reset";
-import {Button} from "../../ui/atoms";
+import { resetedCards } from '../../models/reset';
+import { Button } from '../../ui/atoms';
 
-export const RestartButton = ({secondary}) => {
+export const RestartButton = ({ secondary }) => {
+	const clickHandler = () => {
+		resetedCards();
+	};
 
-    const clickHandler = () => {
-        resetedCards()
-    }
-
-    return <Button onClick={clickHandler} secondary={secondary}>Restart</Button>
-}
+	return (
+		<Button onClick={clickHandler} secondary={secondary}>
+			Restart
+		</Button>
+	);
+};

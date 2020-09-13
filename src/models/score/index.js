@@ -1,3 +1,3 @@
-import {createStore} from "effector";
+import { createStore } from 'effector';
 
 export const $score = createStore(0);
