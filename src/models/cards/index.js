@@ -2,11 +2,12 @@ import { createEvent, createEffect, createStore } from 'effector';
 import { createGate } from 'effector-react';
 import { createDeck } from '../../api';
 
-export const initedCards = createEffect();
+export const cardsOpenedInit = createEvent();
 export const cardClicked = createEvent();
 export const cardSelected = createEvent();
 export const cardCompared = createEvent();
 
+export const cardsClosedInitFx = createEffect();
 export const cardComparingFinishedFx = createEffect();
 
 export const $cards = createStore(createDeck());
