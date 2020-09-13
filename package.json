@@ -1,6 +1,6 @@
 {
-  "name": "memory-game-effector",
-  "version": "0.1.0",
+  "name": "memory-game",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "effector": "^21.3.0",
