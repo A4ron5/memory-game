@@ -4,13 +4,22 @@ import styled, { css } from 'styled-components';
 import { HalfOfCard } from '../molecules';
 import { BigSuit } from '../molecules';
 
+import back from '../../../../assets/back.jpg';
+
+const Back = styled.div`
+	width: 100%;
+	height: 100%;
+	border-radius: 8px;
+	background-image: url(${back});
+`;
+
 const Layout = styled.div`
 	display: flex;
 	flex-direction: column;
 	height: 168px;
 	width: 120px;
 	padding: 0.5rem 0.3rem;
-	background: #fff;
+	background: url(${back});
 	border-radius: 0.5rem;
 	transition: all 0.2s ease-in-out;
 
@@ -21,8 +30,10 @@ const Layout = styled.div`
 	${({ open }) =>
 		open &&
 		css`
+			padding: 0.5rem 0.3rem;
 			transform: scale(1.07);
 			box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+			background: #fff;
 		`}
 
 	${({ disable }) =>
@@ -38,8 +49,12 @@ const Layout = styled.div`
 
 export const StyledCard = ({ rank, suit, disable, open, clickHandler }) => (
 	<Layout disable={disable} open={open} onClick={clickHandler}>
-		<HalfOfCard rank={rank} suit={suit} />
-		<BigSuit suit={suit} />
-		<HalfOfCard rank={rank} suit={suit} bottom />
+		{open || disable ? (
+			<>
+				<HalfOfCard rank={rank} suit={suit} />
+				<BigSuit suit={suit} />
+				<HalfOfCard rank={rank} suit={suit} bottom />
+			</>
+		) : null}
 	</Layout>
 );
